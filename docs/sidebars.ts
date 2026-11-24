@@ -50,13 +50,7 @@ const sidebars: SidebarsConfig = {
       type: "category",
       label: "Reference",
       collapsed: false,
-      items: ["reference/api-overview", { type: "ref", id: "api/index", label: "API reference" }, "reference/troubleshooting", "reference/how-it-works"],
-    },
-    {
-      type: "category",
-      label: "Deep dives",
-      collapsed: false,
-      items: ["deep-dives/dedication-to-quality"],
+      items: ["reference/api-overview", { type: "ref", id: "api/index", label: "API reference" }, "reference/troubleshooting", "reference/how-it-works", "reference/dedication-to-quality"],
     },
     {
       type: "category",

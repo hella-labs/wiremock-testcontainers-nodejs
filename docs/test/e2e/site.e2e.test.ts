@@ -96,7 +96,7 @@ describe("docs URLs used across the repository", () => {
   // A URL followed by "<" is a placeholder, like `…/docs/<page>`.
   const pattern = new RegExp(`${DOCS_URL.replaceAll(".", "\\.")}[^\\s)"'\`<>\\]|}]*<?`, "gu");
   const sources = [
-    ...["README.md", "CONTRIBUTING.md", "release.md", "package.json"].map((file) => join(REPO_ROOT, file)),
+    ...["README.md", ".github/CONTRIBUTING.md", "release.md", "package.json"].map((file) => join(REPO_ROOT, file)),
     ...filesIn(join(REPO_ROOT, "src"), /\.ts$/u).map((file) => join(REPO_ROOT, "src", file)),
     ...filesIn(EXAMPLES_DIR, /\.(?:ts|mts|mjs|md|json)$/u, ["node_modules", "coverage"]).map((file) => join(EXAMPLES_DIR, file)),
     ...filesIn(join(REPO_ROOT, ".github"), /\.(?:ya?ml|md)$/u).map((file) => join(REPO_ROOT, ".github", file)),

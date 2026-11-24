@@ -7,7 +7,7 @@ import { describe, expect, it } from "vitest";
  * pull request template – links to files and sections of each other: each must exist. (The docs
  * site checks its own pages at build time.)
  */
-const FILES = ["README.md", "CONTRIBUTING.md", "release.md", "ROADMAP.md", "docs/README.md", "examples/README.md", "examples/extensions/README.md", ".github/pull_request_template.md"];
+const FILES = ["README.md", ".github/CONTRIBUTING.md", "release.md", "ROADMAP.md", "docs/README.md", "examples/README.md", "examples/extensions/README.md", ".github/pull_request_template.md"];
 
 /** GitHub's anchor for a heading: lower case, punctuation dropped, spaces as dashes. */
 const anchor = (heading: string): string =>

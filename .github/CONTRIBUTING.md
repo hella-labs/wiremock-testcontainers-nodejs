@@ -126,7 +126,7 @@ label changes users cannot observe `no-docs-needed`.
   [`../docs`](../docs): typecheck, lint, unit tests, build and site E2E. Never `--no-docker`.
 - `docs.yml` – on changes to `../docs`, `examples/`, `src/`, `README.md` or `package.json` on `main`:
   verifies and builds the site, then deploys it to GitHub Pages (repository settings → Pages →
-  Source: GitHub Actions). How the site follows releases: [release.md](./release.md).
+  Source: GitHub Actions). How the site follows releases: [release.md](../release.md).
 - `docs-required.yml` – the definition of done: `../src` changes need `docs/` or `examples/` changes
   or the `no-docs-needed` label.
 - `size.yml` – fails a PR whose tarball exceeds `MAX_TARBALL_KB`. Only `../dist`, `README.md`,
