@@ -26,6 +26,12 @@
   margin: 2.5rem 0 2rem;
 }
 
+.badges {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 1.5rem;
+}
+
 .install {
   margin: 1.5rem auto 0;
   max-width: 40rem;

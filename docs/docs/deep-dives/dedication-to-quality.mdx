@@ -1,0 +1,79 @@
+---
+title: Dedication to quality
+description: How the library, its examples and these docs are tested – unit and integration tests, coverage, performance and accessibility.
+---
+
+# Dedication to quality
+
+A testing library has to be more reliable than the code it tests. This page describes how
+WireMock Testcontainers for Node.js earns that: what is tested, how often, and to what standard.
+
+## Unit tests
+
+The library's unit tests run without Docker, so they are fast and run on every change. They cover
+the builder, registration and validation, extensions, JAR handling, the no-Docker runtime and the
+repository's own scripts. Coverage of `src/` is collected in CI and **enforced at 95 %** for
+statements, branches, functions and lines – a pull request that drops below it fails.
+
+The docs tooling – the plugins that embed snippets, check links and generate the API overview – is
+unit-tested too, at **100 % coverage**.
+
+## Integration tests
+
+Mocks of a mock prove little, so every change also runs against a real WireMock container:
+
+- **Library end-to-end tests** start WireMock in Docker on Node.js 22 and 24 and exercise the
+  public API over real HTTP.
+- **The examples project** consumes the _built_ package through `npm link`, exactly as you would.
+  Every example is type-checked, linted, unit-tested at **100 % coverage per file**, and run
+  end-to-end against WireMock.
+- **The docs site** is built and served, and every page, embedded snippet and docs link used
+  anywhere in the repository – JSDoc, READMEs, examples – is checked to resolve, anchors included.
+
+CI never uses [`--no-docker`](../guides/running-without-docker.mdx): Docker stays the source of
+truth.
+
+## Docs that cannot drift
+
+Every code snippet on this site is embedded from the examples project – hand-written TypeScript,
+JavaScript or JSON in a page fails the build. Every example links back to the page that shows it,
+every public API must be documented and used in an example, and a pull request that changes the
+library must update its docs or examples. See [how it works](../reference/how-it-works.mdx) and
+[contributing to the docs](../contributing/documentation.mdx).
+
+## Performance
+
+Integration tests are only useful if people run them, so the library is designed to keep them
+fast:
+
+- **One container per suite.** [`reset()`](../guides/test-isolation.mdx) restores stubs, scenarios
+  and the request journal between tests in milliseconds, instead of restarting WireMock.
+- **Fail before Docker.** Registrations are validated when they are made, and `start()` checks
+  extensions and options before starting anything – mistakes surface in a unit test, not minutes
+  later.
+- **One runtime dependency.** `testcontainers` is the only dependency; the package is
+  tree-shakeable and ships ESM and CJS.
+- **No Docker for local development.** [A local WireMock JVM](../guides/running-without-docker.mdx)
+  can serve every container when Docker is unavailable.
+
+## Accessibility
+
+These docs are built with Docusaurus: semantic HTML, a skip-to-content link, keyboard-navigable
+menus, and a dark theme by default with a light theme one click away. The brand
+colours are adjusted per theme – links in dark mode use a lighter pink so they stay readable on the
+navy background – and images carry alternative text.
+
+## Coverage at a glance
+
+Each block of the sunburst is a directory or file of `src/`, sized by its number of lines and
+coloured by its coverage. The graph updates with every push to `main`; open the
+[full report on Codecov](https://codecov.io/gh/hella-labs/wiremock-testcontainers-nodejs) for
+line-by-line detail.
+
+<a href="https://codecov.io/gh/hella-labs/wiremock-testcontainers-nodejs">
+  <img
+    src="https://codecov.io/gh/hella-labs/wiremock-testcontainers-nodejs/graphs/sunburst.svg?token=Z8O1KEH03J"
+    alt="Sunburst graph of test coverage of the library's source, by directory and file"
+    width="400"
+  />
+</a>

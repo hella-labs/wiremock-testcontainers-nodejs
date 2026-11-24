@@ -66,6 +66,11 @@ function Hero(): ReactNode {
             API reference
           </Link>
         </div>
+        <p className={styles.badges}>
+          <a href="https://codecov.io/gh/hella-labs/wiremock-testcontainers-nodejs">
+            <img src="https://codecov.io/gh/hella-labs/wiremock-testcontainers-nodejs/graph/badge.svg?token=Z8O1KEH03J" alt="Test coverage on Codecov" />
+          </a>
+        </p>
         <div className={styles.install}>
           <Tabs groupId="package-manager">
             <TabItem value="npm" label="npm" default>

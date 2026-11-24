@@ -4,6 +4,7 @@
 [![Docs](https://github.com/hella-labs/wiremock-testcontainers-nodejs/actions/workflows/docs.yml/badge.svg)](https://hellalabs.dev/wiremock-testcontainers-nodejs/)
 [![npm](https://img.shields.io/npm/v/%40hellaweb3%2Fwiremock-testcontainers-nodejs)](https://www.npmjs.com/package/@hellaweb3/wiremock-testcontainers-nodejs)
 [![downloads](https://img.shields.io/npm/dm/%40hellaweb3%2Fwiremock-testcontainers-nodejs)](https://www.npmjs.com/package/@hellaweb3/wiremock-testcontainers-nodejs)
+[![codecov](https://codecov.io/gh/hella-labs/wiremock-testcontainers-nodejs/graph/badge.svg?token=Z8O1KEH03J)](https://codecov.io/gh/hella-labs/wiremock-testcontainers-nodejs)
 
 Run [WireMock](https://wiremock.org/) in [Testcontainers](https://node.testcontainers.org/) with a
 fluent TypeScript API modelled on the official

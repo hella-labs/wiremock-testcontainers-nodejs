@@ -54,6 +54,12 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Deep dives",
+      collapsed: false,
+      items: ["deep-dives/dedication-to-quality"],
+    },
+    {
+      type: "category",
       label: "Contributing",
       items: ["contributing/documentation"],
     },
