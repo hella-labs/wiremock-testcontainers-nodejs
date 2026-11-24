@@ -2,13 +2,13 @@
 
 How the library is released, and how its [documentation](https://hellalabs.dev/wiremock-testcontainers-nodejs/)
 follows – especially through major versions. For how every change keeps the docs up to date, see
-[CONTRIBUTING.md → Keeping the docs in step](./CONTRIBUTING.md#keeping-the-docs-in-step-with-the-library).
+[CONTRIBUTING.md → Keeping the docs in step](./.github/CONTRIBUTING.md#keeping-the-docs-in-step-with-the-library).
 
 ## How the docs follow the library
 
 - **The site is built from `main`.** `docs.yml` deploys it on every change to `docs/`, `examples/`,
   `src/`, `README.md` or `package.json` – no release step publishes docs. Since every change merges
-  with its docs ([definition of done](./CONTRIBUTING.md#definition-of-done)), `main`'s docs
+  with its docs ([definition of done](./.github/CONTRIBUTING.md#definition-of-done)), `main`'s docs
   describe `main`'s code.
 - **One docs version per major.** The current docs – `docs/docs/` – document the major in
   `package.json`; earlier majors are frozen copies in `docs/versioned_docs/`, with their code

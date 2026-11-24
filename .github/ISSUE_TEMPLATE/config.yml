@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://hellalabs.dev/wiremock-testcontainers-nodejs/
+    about: Read guides, API reference, and troubleshooting before opening an issue.
+  - name: Support
+    url: https://github.com/hella-labs/wiremock-testcontainers-nodejs/blob/main/SUPPORT.md
+    about: Ask for usage help and include the environment details in SUPPORT.md.
+  - name: Security vulnerability
+    url: https://github.com/hella-labs/wiremock-testcontainers-nodejs/security/advisories/new
+    about: Report vulnerabilities privately instead of using a public issue.

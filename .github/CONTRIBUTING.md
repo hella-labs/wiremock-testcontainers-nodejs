@@ -2,34 +2,34 @@
 
 Tooling: [Vitest](https://vitest.dev/), [oxlint](https://oxc.rs/docs/guide/usage/linter), `tsc` and
 [tsdown](https://tsdown.dev/); the docs use [Docusaurus](https://docusaurus.io/) and
-[TypeDoc](https://typedoc.org/). Node version: `.nvmrc`.
+[TypeDoc](https://typedoc.org/). Node version: `../.nvmrc`.
 
 The repository holds three projects, each with its own dependencies, scripts and lockfile:
 
 | Project | Directory | Package manager | What it is |
 |---------|-----------|-----------------|------------|
 | Library | `/` | pnpm | The published package |
-| Examples | [`examples/`](./examples) | npm | Runnable, tested examples of every API – the only source of code in the docs |
-| Docs | [`docs/`](./docs) | npm | The [documentation site](https://hellalabs.dev/wiremock-testcontainers-nodejs/) |
+| Examples | [`../examples`](../examples) | npm | Runnable, tested examples of every API – the only source of code in the docs |
+| Docs | [`../docs`](../docs) | npm | The [documentation site](https://hellalabs.dev/wiremock-testcontainers-nodejs/) |
 
 ## Scripts
 
 | Command                        | What it does                                                        | Needs    |
 |--------------------------------|---------------------------------------------------------------------|----------|
-| `pnpm build`                   | One barrel per format (ESM, CJS, declarations) into `dist/`, checked by publint and attw | – |
-| `pnpm typecheck`               | `tsc --noEmit` over `src/` and `test/`                              | –        |
-| `pnpm lint`                    | `oxlint --deny-warnings` over the library (`examples/` and `docs/` lint themselves) | – |
-| `pnpm test:unit`               | `test/unit/**` – 100 % of `src/`                                    | –        |
-| `pnpm test:e2e`                | `test/index.test.ts` against a WireMock container                   | Docker   |
+| `pnpm build`                   | One barrel per format (ESM, CJS, declarations) into `../dist`, checked by publint and attw | – |
+| `pnpm typecheck`               | `tsc --noEmit` over `../src` and `test/`                              | –        |
+| `pnpm lint`                    | `oxlint --deny-warnings` over the library (`../examples` and `docs/` lint themselves) | – |
+| `pnpm test:unit`               | `test/unit/**` – 100 % of `../src`                                    | –        |
+| `pnpm test:e2e`                | `../test/index.test.ts` against a WireMock container                   | Docker   |
 | `pnpm test:e2e --no-docker`    | The same against a local WireMock JVM – local only, refused in CI   | Java 11+ |
 | `pnpm test`, `pnpm test:coverage` | Both suites; the latter enforces 95 % coverage                   | Docker   |
 | `pnpm check`                   | `build`, `typecheck`, `lint` and `test:coverage` in one go          | Docker   |
-| `pnpm examples:setup`          | Build, `npm link`, and install and link [`examples/`](./examples)   | –        |
-| `pnpm examples:unit`           | `examples:setup`, then typecheck, lint and unit-test `examples/` (100 % coverage per file) | – |
-| `pnpm examples:e2e`            | `examples:setup`, then typecheck, lint and test `examples/` (accepts `--no-docker`) | Docker |
+| `pnpm examples:setup`          | Build, `npm link`, and install and link [`../examples`](../examples)   | –        |
+| `pnpm examples:unit`           | `examples:setup`, then typecheck, lint and unit-test `../examples` (100 % coverage per file) | – |
+| `pnpm examples:e2e`            | `examples:setup`, then typecheck, lint and test `../examples` (accepts `--no-docker`) | Docker |
 | `pnpm docs:start`              | Preview the docs site with live reload                              | –        |
 | `pnpm docs:check`              | The docs' quality gate: typecheck, lint, unit tests (100 % coverage), build and site E2E | – |
-| `pnpm docs:<script>`           | Any script of `docs/package.json` – `docs:build`, `docs:test:unit`, `docs:version:cut`, … ([all](./docs/README.md#running-the-docs)); installs `docs/` when needed | – |
+| `pnpm docs:<script>`           | Any script of `../docs/package.json` – `docs:build`, `docs:test:unit`, `docs:version:cut`, … ([all](../docs/README.md#running-the-docs)); installs `docs/` when needed | – |
 | `pnpm build:extensions`        | Pack the fixture extension JARs from their compiled classes (`--check`: verify only) | – |
 
 ## Without Docker
@@ -40,7 +40,7 @@ CI/CD. Treat a green run as a fast local signal, not E2E sign-off. To get a cont
 
 | Environment                    | How                                                                          |
 |--------------------------------|------------------------------------------------------------------------------|
-| Codespaces / Dev Containers    | `.devcontainer/devcontainer.json` adds `docker-in-docker`                    |
+| Codespaces / Dev Containers    | `../.devcontainer/devcontainer.json` adds `docker-in-docker`                    |
 | Host socket in a dev container | Mount `/var/run/docker.sock`; set `TESTCONTAINERS_HOST_OVERRIDE=host.docker.internal` if port lookups fail |
 | Remote or rootless daemon      | `DOCKER_HOST=tcp://host:2375` or `unix:///path/to/docker.sock`               |
 | Podman                         | `DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock`, `TESTCONTAINERS_RYUK_DISABLED=true` |
@@ -49,23 +49,23 @@ CI/CD. Treat a green run as a fast local signal, not E2E sign-off. To get a cont
 ## Documentation
 
 The [docs site](https://hellalabs.dev/wiremock-testcontainers-nodejs/) lives in
-[`docs/`](./docs) – see its [README](./docs/README.md). **Every docs task is a script of
-`docs/package.json`: run it from the repository root with `pnpm docs:<script>`, or from `docs/`
+[`../docs`](../docs) – see its [README](../docs/README.md). **Every docs task is a script of
+`../docs/package.json`: run it from the repository root with `pnpm docs:<script>`, or from `docs/`
 with `npm run <script>`** – e.g. `pnpm docs:start` to preview, `pnpm docs:check` before pushing.
 In short:
 
-- **Guides** are MDX pages in `docs/docs/`. They contain no hand-written code: a code block
+- **Guides** are MDX pages in `../docs/docs`. They contain no hand-written code: a code block
   ```` ```ts file=stubs/stubs.ts#registrations ```` is filled at build time from a
-  `// #region registrations` of the [examples](./examples), which are type-checked, linted and
+  `// #region registrations` of the [examples](../examples), which are type-checked, linted and
   tested. Every example file links back to its page with an `@see` comment.
-- **The API reference** is generated by TypeDoc from the JSDoc in `src/`. It fails the build for
+- **The API reference** is generated by TypeDoc from the JSDoc in `../src`. It fails the build for
   any undocumented export or member; JSDoc `@example`s must be excerpts of tested examples.
 - **README snippets** are copies marked `<!-- snippet: … -->`; `pnpm docs:sync:markdown`
   refreshes them.
-- **The site is deployed from `main`**, one docs version per major: see [release.md](./release.md).
+- **The site is deployed from `main`**, one docs version per major: see [release.md](../release.md).
 
 The docs' tests fail when an export or public member has no example, no guide or no entry in the
-[API overview](./docs/docs/reference/api-overview.mdx), and when any snippet, link or anchor is
+[API overview](../docs/docs/reference/api-overview.mdx), and when any snippet, link or anchor is
 broken.
 
 ## Keeping the docs in step with the library
@@ -75,23 +75,23 @@ docs describing it land in the **same pull request**. Where each part of the doc
 
 | Users read | Written in | Built from |
 |------------|------------|------------|
-| API reference | JSDoc in `src/` | TypeDoc, at every docs build |
-| Guides | `docs/docs/**/*.mdx` | Prose, plus code regions of `examples/` |
-| Code in guides and the README | `examples/` – tested like library code | Embedded at build time; the README via `pnpm docs:sync:markdown` |
-| Index of every API | `docs/docs/reference/api-overview.mdx` | Hand-written, checked for completeness |
+| API reference | JSDoc in `../src` | TypeDoc, at every docs build |
+| Guides | `docs/docs/**/*.mdx` | Prose, plus code regions of `../examples` |
+| Code in guides and the README | `../examples` – tested like library code | Embedded at build time; the README via `pnpm docs:sync:markdown` |
+| Index of every API | `../docs/docs/reference/api-overview.mdx` | Hand-written, checked for completeness |
 
 What to update, by kind of change – and what fails if you forget:
 
 | Your change | Update | Caught by |
 |-------------|--------|-----------|
 | Internal – refactoring, performance, a fix users cannot observe | Nothing; label the pull request `no-docs-needed` | *Docs required* check, without the label |
-| Observable behaviour or an error message | The guide describing it, the examples asserting it, [troubleshooting](./docs/docs/reference/troubleshooting.mdx) for errors | The examples' tests – they assert behaviour and messages |
+| Observable behaviour or an error message | The guide describing it, the examples asserting it, [troubleshooting](../docs/docs/reference/troubleshooting.mdx) for errors | The examples' tests – they assert behaviour and messages |
 | **New export, method or option** | JSDoc with an `@see` link to its guide section; an example using it, unit-tested and – if it talks to WireMock – E2E-tested; a guide section embedding the example; a row in the API overview | TypeDoc (undocumented), the docs' API coverage tests (unused, unexplained, unlisted) |
 | Compatible change to a signature | JSDoc, the examples using it, the guide's prose | The examples' type check; embedded snippets update by themselves |
 | Deprecation | `@deprecated` in its JSDoc, naming the replacement; a note in its guide; examples keep using it until it is removed | The API coverage tests, which require an example for every export |
 | Removal | Its examples, guide sections and API overview row | Docusaurus: the overview's link to the removed API page breaks the build |
-| **Breaking change** | As above, plus a migration guide entry; the first breaking change of a major also opens it – [release.md → Major releases](./release.md#major-releases) | The docs' version tests |
-| Renaming a guide section | The `@see` anchors pointing at it, in `src/` and `examples/` | Docusaurus (broken anchors) and the site E2E test |
+| **Breaking change** | As above, plus a migration guide entry; the first breaking change of a major also opens it – [release.md → Major releases](../release.md#major-releases) | The docs' version tests |
+| Renaming a guide section | The `@see` anchors pointing at it, in `../src` and `examples/` | Docusaurus (broken anchors) and the site E2E test |
 | Example code | Nothing else: snippets and their line links follow; keep `#region` markers intact | The docs' sync tests (unused or missing regions) |
 | The README's quick start example | `pnpm docs:sync:markdown` | The docs' sync tests |
 
@@ -103,11 +103,11 @@ A change to the library is done when:
 
 1. tests cover it;
 2. if it changes the public API: its JSDoc documents it with an `@see` link to its guide section;
-   an example in `examples/` uses it – unit-tested, and E2E-tested if it talks to WireMock; a guide
+   an example in `../examples` uses it – unit-tested, and E2E-tested if it talks to WireMock; a guide
    in `docs/docs/` explains it, embedding that example; the API overview lists it;
 3. if it breaks the API: a migration guide entry describes it, and – if it is the first breaking
    change of a major – the previous major's docs were frozen and `main` moved to the next major's
-   pre-release ([release.md → Major releases](./release.md#major-releases));
+   pre-release ([release.md → Major releases](../release.md#major-releases));
 4. the library's, the examples' and the docs' quality gates pass:
 
 ```bash
@@ -116,29 +116,29 @@ pnpm examples:unit && pnpm examples:e2e
 pnpm docs:check
 ```
 
-The *Docs required* check fails pull requests that change `src/` without `docs/` or `examples/`;
+The *Docs required* check fails pull requests that change `../src` without `docs/` or `examples/`;
 label changes users cannot observe `no-docs-needed`.
 
 ## CI
 
 - `main.yml` – build, typecheck, lint, unit tests with coverage and E2E tests on Node 22 and 24,
-  plus [`examples/`](./examples) through `npm link`: typecheck, lint, unit tests, then E2E, and
-  [`docs/`](./docs): typecheck, lint, unit tests, build and site E2E. Never `--no-docker`.
-- `docs.yml` – on changes to `docs/`, `examples/`, `src/`, `README.md` or `package.json` on `main`:
+  plus [`../examples`](../examples) through `npm link`: typecheck, lint, unit tests, then E2E, and
+  [`../docs`](../docs): typecheck, lint, unit tests, build and site E2E. Never `--no-docker`.
+- `docs.yml` – on changes to `../docs`, `examples/`, `src/`, `README.md` or `package.json` on `main`:
   verifies and builds the site, then deploys it to GitHub Pages (repository settings → Pages →
   Source: GitHub Actions). How the site follows releases: [release.md](./release.md).
-- `docs-required.yml` – the definition of done: `src/` changes need `docs/` or `examples/` changes
+- `docs-required.yml` – the definition of done: `../src` changes need `docs/` or `examples/` changes
   or the `no-docs-needed` label.
-- `size.yml` – fails a PR whose tarball exceeds `MAX_TARBALL_KB`. Only `dist/`, `README.md`,
+- `size.yml` – fails a PR whose tarball exceeds `MAX_TARBALL_KB`. Only `../dist`, `README.md`,
   `LICENSE` and `package.json` are published. The `.cjs` and `.js` twins sit beyond gzip's 32 KB
   window of each other, so each compresses in full – a byte saved in `src/` saves two.
 - Supply chain: frozen lockfile; install scripts allow-listed and `minimumReleaseAge: 1440` in
-  `pnpm-workspace.yaml`; a non-blocking `pnpm audit --prod`; weekly Dependabot updates with a
+  `../pnpm-workspace.yaml`; a non-blocking `pnpm audit --prod`; weekly Dependabot updates with a
   3-day cooldown – for the library, `examples/` and `docs/`.
 
 ## Releasing
 
-[release.md](./release.md) has the full procedure. In short:
+[release.md](../release.md) has the full procedure. In short:
 
 - **Patch or minor:** `pnpm version patch` (or `minor`) and `git push --follow-tags`; the tag runs
   `release.yml`, then run `publish.yml` (Actions → *Publish to NPM*). The docs need nothing: they
@@ -150,14 +150,14 @@ label changes users cannot observe `no-docs-needed`.
 
 ## Tests and fixtures
 
-- `test/__mocks__/wiremock` – a recorded session plus negative cases: `GET /cards?page=0` → 400,
+- `../test/__mocks__/wiremock` – a recorded session plus negative cases: `GET /cards?page=0` → 400,
   and `GET /account/balance` → 500 with `X-Mock-Scenario: server-error` (`"priority": 1`).
-- `test/helpers/assertions.ts` – a `Schema<T>` per payload; the compiler requires every field to
+- `../test/helpers/assertions.ts` – a `Schema<T>` per payload; the compiler requires every field to
   be asserted.
 - `test/__mocks__/extensions/<jar>/classes` – compiled WireMock extensions (Java 11 bytecode; no
   Java source, no JDK), described in its README. After changing them, run `pnpm build:extensions`.
-  `fixtures.test.ts` fails on an out-of-date JAR or `examples/` copy, newer bytecode, or a `.java` file.
-- `test/helpers/container.ts` – reads the archive Testcontainers would upload, so registration
+  `fixtures.test.ts` fails on an out-of-date JAR or `../examples` copy, newer bytecode, or a `.java` file.
+- `../test/helpers/container.ts` – reads the archive Testcontainers would upload, so registration
   tests need no Docker.
 - `test/unit/*.test.ts` stub only what talks to the outside: `fetch`, `spawn` (a fake JVM) or
   `GenericContainer.start`.

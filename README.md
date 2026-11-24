@@ -102,7 +102,9 @@ Every task: [`docs/README.md`](./docs/README.md#running-the-docs).
 
 - [`examples/`](./examples) – runnable, tested examples for every API, consuming the package via
   `npm link`. Every code snippet in the documentation is embedded from them.
-- [CONTRIBUTING.md](./CONTRIBUTING.md) – scripts, CI, tests and the definition of done.
+- [CONTRIBUTING.md](.github/CONTRIBUTING.md) – scripts, CI, tests and the definition of done.
+- [Code of Conduct](./CODE_OF_CONDUCT.md) – standards for a welcoming community.
+- [Security policy](./SECURITY.md) – how to report vulnerabilities privately.
 - [release.md](./release.md) – releasing, and how the docs follow major versions.
 
 Maintained by [Hella Labs](https://hellalabs.dev/). [MIT](./LICENSE) licensed.

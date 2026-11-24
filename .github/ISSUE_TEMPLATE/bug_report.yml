@@ -1,0 +1,53 @@
+name: Bug report
+description: Report a reproducible problem in the library
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve the project. Search existing issues before submitting.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened, and what did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Provide the smallest runnable example or precise steps.
+      render: typescript
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include package, Node.js, OS, architecture, and container runtime versions.
+      placeholder: |
+        Package:
+        Node.js:
+        OS:
+        Architecture:
+        Container runtime:
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs and errors
+      description: Add complete relevant error messages or logs.
+      render: shell
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues and documentation.
+          required: true
+        - label: I used the latest published package or identified an affected version.
+          required: true

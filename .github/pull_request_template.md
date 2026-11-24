@@ -4,7 +4,7 @@
 
 ## Definition of done
 
-See [CONTRIBUTING.md → Definition of done](../CONTRIBUTING.md#definition-of-done).
+See [CONTRIBUTING.md → Definition of done](CONTRIBUTING.md#definition-of-done).
 
 - [ ] Tests cover the change – `pnpm test:unit --coverage` (and `pnpm test:e2e` for container behaviour)
 - [ ] **Public API changed?** Its JSDoc documents it, with an `@see` link to its guide section
