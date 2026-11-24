@@ -54,6 +54,14 @@ jobs:
       - name: Unit tests (with coverage)
         run: pnpm test:unit --coverage
 
+      # Uploads coverage/lcov.info once per run (from one matrix leg) to avoid duplicate reports.
+      - name: Upload coverage reports to Codecov
+        if: matrix.node == '24'
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: hella-labs/wiremock-testcontainers-nodejs
+
       # A real WireMock container (ubuntu-latest ships Docker). Never --no-docker: refused in CI.
       - name: E2E tests
         run: pnpm test:e2e
