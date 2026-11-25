@@ -107,4 +107,6 @@ Every task: [`docs/README.md`](./docs/README.md#running-the-docs).
 - [Security policy](./SECURITY.md) – how to report vulnerabilities privately.
 - [release.md](./release.md) – releasing, and how the docs follow major versions.
 
+----
+
 Maintained by [Hella Labs](https://hellalabs.dev/). [MIT](./LICENSE) licensed.
